@@ -1,0 +1,87 @@
+.mainContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        height: 436px;
+        overflow: hidden;
+        align-items: center;
+
+        .container1 {
+            width: 100%;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 350px;
+                object-fit: cover;
+                border-radius: 25px;
+            }
+
+            .likesButton {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 4px 10px;
+                border: none;
+                border-radius: 14px;
+                box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.4);
+                font-size: 12px;
+                margin-top: 20px;
+                margin-right: 20px;
+            }
+
+            .visitButton {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.4);
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                cursor: pointer;
+            }
+
+            &:hover .visitButton {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            &:hover img {
+                opacity: 80%;
+            }
+        }
+
+        .container2 {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .imageSize {
+                font-size: 22px;
+            }
+
+            .imageDate {
+                color: rgb(129, 129, 129);
+            }
+
+            img {
+                width: 28px;
+                padding-top: 6px;
+                cursor: pointer;
+            }
+        }        
+    }
+}

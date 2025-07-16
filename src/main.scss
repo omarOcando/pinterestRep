@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+};
+
+/* COMPONENTS */
+@import "./components/button/button";
+
+/* EXTENDS */
+@import "./global/extends";
+
+/* MIXINS */
+@import "./global/mixins";
+
+/* VARIABLES */
+@import "./global/variables";
