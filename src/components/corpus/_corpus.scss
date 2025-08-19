@@ -1,3 +1,9 @@
+@import "/src/global/variables";
+@import "/src/global/mixins";
+
+
+
+
 .mainContainer {
     width: 100%;
     display: flex;
@@ -6,13 +12,13 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 
     .card {
         display: flex;
         flex-direction: column;
         width: 250px;
-        height: 436px;
+        height: 520px;
         overflow: hidden;
         align-items: center;
 
@@ -28,24 +34,25 @@
             }
 
             .likesButton {
+                @include btn-shadow($shadow_color);
                 position: absolute;
                 top: 0;
                 right: 0;
                 padding: 4px 10px;
                 border: none;
                 border-radius: 14px;
-                box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.4);
                 font-size: 12px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
 
             .visitButton {
+                background-color: $ppal_color;
+                @include btn-shadow($shadow_color);
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                box-shadow: 0px 4px 8px rgb(0, 0, 0, 0.4);
                 pointer-events: none;
                 opacity: 0;
                 transition: opacity 0.3s ease;
@@ -67,7 +74,24 @@
             width: 100%;
             display: flex;
             flex-direction: column;
+            gap: 6px;
             align-items: center;
+
+            .userInfo {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                img {
+                    width: 45px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                h3 {
+                    font-size: 16px;
+                }
+            }
 
             .imageSize {
                 font-size: 22px;

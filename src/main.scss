@@ -1,17 +1,26 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-};
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /* COMPONENTS */
 @import "./components/button/button";
-
-/* EXTENDS */
-@import "./global/extends";
+@import "./components/header/header";
+@import "./components/corpus/corpus";
+@import "./components/footer/footer";
 
 /* MIXINS */
 @import "./global/mixins";
 
 /* VARIABLES */
 @import "./global/variables";
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $ppal_typography;
+}
