@@ -2,7 +2,6 @@ import "./_header.scss";
 import { button } from "../../components/button/button";
 import bellPic from "../../assets/bellPic.png";
 import cloudPic from "../../assets/cloudPic.png";
-import downloadButtonPic from "../../assets/downloadButtonPic.png";
 import { getHomeImages } from "../corpus/corpus";
 import logo from "../../assets/favicon.ico";
 import { renderImages } from "../renderImages";
@@ -39,20 +38,43 @@ const apiUrl = "https://api.unsplash.com";
 
 
 async function searchImage() {
-
     const enterValue = document.querySelector(".inputValue").value;
-
+    
     if (enterValue) {
-        document.querySelector(".inputValue").value = "";
-        
-        const containerCorpus = document.querySelector(".mainContainer");
-        containerCorpus.innerHTML = "";
-
-        const query = enterValue;
-        const res = await fetch(`${apiUrl}/search/photos?query=${query}&client_id=${accessKeyUnsplash}`);
-        const data = await res.json();
-
-        renderImages(data.results, containerCorpus);
+        try {
+            document.querySelector(".inputValue").value = "";
+            const containerCorpus = document.querySelector(".mainContainer");
+            containerCorpus.innerHTML = "";
+            
+            const query = enterValue;
+            const res = await fetch(`${apiUrl}/search/photos?query=${query}&client_id=${accessKeyUnsplash}`);
+            
+            // Verificar si la respuesta es exitosa
+            if (!res.ok) {
+                throw new Error(`Error HTTP: ${res.status} - ${res.statusText}`);
+            }
+            
+            const data = await res.json();
+            
+            // Verificar si hay resultados
+            if (data.results && data.results.length > 0) {
+                renderImages(data.results, containerCorpus);
+            } else {
+                containerCorpus.innerHTML = "<p>No se encontraron imágenes para esta búsqueda.</p>";
+            }
+            
+        } catch (error) {
+            console.error("Error al buscar imágenes:", error);
+            
+            // Mostrar mensaje de error al usuario
+            const containerCorpus = document.querySelector(".mainContainer");
+            containerCorpus.innerHTML = `
+                <div class="error-message">
+                    <p>❌ Error al cargar las imágenes</p>
+                    <p>Por favor, inténtalo de nuevo más tarde.</p>
+                </div>
+            `;
+        }
     }
 }
 

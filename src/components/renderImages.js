@@ -6,8 +6,6 @@ import downloadButtonPic from "../assets/downloadButtonPic.png";
 
 function renderImages (images, container) {
 
-    console.log(images);
-
     for (const image of images) {
 
         const div1 = document.createElement("div");

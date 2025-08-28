@@ -1,6 +1,4 @@
 import "./_corpus.scss";
-import downloadButtonPic from "../../assets/downloadButtonPic.png";
-import { button } from "../../components/button/button";
 import { renderImages } from "../renderImages";
 
 
@@ -28,13 +26,45 @@ const apiUrl = "https://api.unsplash.com";
 
 
 async function getHomeImages() {
-
-    const query = "trending";
-    const res = await fetch(`${apiUrl}/search/photos?query=${query}&client_id=${accessKeyUnsplash}`);
-    const data = await res.json();
-    
-    const totalContainer = document.querySelector(".mainContainer");
-    renderImages(data.results, totalContainer);
+    try {
+        const query = "trending";
+        const res = await fetch(`${apiUrl}/search/photos?query=${query}&client_id=${accessKeyUnsplash}`);
+        
+        // Verificar si la respuesta es exitosa
+        if (!res.ok) {
+            throw new Error(`Error HTTP: ${res.status} - ${res.statusText}`);
+        }
+        
+        const data = await res.json();
+        const totalContainer = document.querySelector(".mainContainer");
+        
+        // Verificar si hay resultados
+        if (data.results && data.results.length > 0) {
+            renderImages(data.results, totalContainer);
+        } else {
+            totalContainer.innerHTML = `
+                <div class="no-results">
+                    <p>📸 No hay imágenes trending disponibles</p>
+                    <p>Intenta buscar algo específico.</p>
+                </div>
+            `;
+        }
+        
+    } catch (error) {
+        console.error("Error al cargar imágenes trending:", error);
+        
+        // Mostrar mensaje de error al usuario
+        const totalContainer = document.querySelector(".mainContainer");
+        totalContainer.innerHTML = `
+            <div class="error-message">
+                <p>❌ Error al cargar las imágenes trending</p>
+                <p>Revisa tu conexión e inténtalo de nuevo.</p>
+                <button onclick="getHomeImages()" class="retry-button">
+                    🔄 Reintentar
+                </button>
+            </div>
+        `;
+    }
 }
 
 export { getHomeImages };
