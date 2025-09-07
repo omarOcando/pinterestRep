@@ -1,6 +1,6 @@
 export default {
     base: '/pinterestRep/',
     build: {
-      outDir: 'dist'
+      outDir: 'docs'
     }
 }
